@@ -1,0 +1,46 @@
+[
+    {
+      "productId": 1,
+      "productName": "Watch 1",
+      "productCode": "GDN-0011",
+      "tax": 1.25,
+      "description": "Description 1",
+      "price": 19.95,
+      "starRating": 3.2,
+      "imageUrl": "assets/images/ceas1.jpg",
+	  "qty":0
+    },
+    {
+      "productId": 2,
+      "productName": "Watch 2",
+      "productCode": "GDN-0023",
+      "tax": 2.23,
+      "description": "Description 2",
+      "price": 32.99,
+      "starRating": 4.2,
+      "imageUrl": "assets/images/ceas2.png",
+	  "qty":0
+    },
+    {
+      "productId": 4,
+      "productName": "Watch 3",
+      "productCode": "TBX-0048",
+      "tax": 3.5,
+      "description": "Description 3",
+      "price": 8.9,
+      "starRating": 4.8,
+      "imageUrl": "assets/images/ceas3.jpg",
+	  "qty":0
+    },
+    {
+      "productId": 5,
+      "productName": "Watch 4",
+      "productCode": "TBX-0022",
+      "tax": 1.8,
+      "description": "Description 4",
+      "price": 11.55,
+      "starRating": 3.7,
+      "imageUrl": "assets/images/ceas4.png",
+	  "qty":0
+    }
+  ]

@@ -1,0 +1,52 @@
+<div>
+  <div class='card-header'>
+    Product List
+  </div>
+  <div class='card-body'>
+    <div class='table-responsive'>
+      <table class='table' 
+            *ngIf='products && products.length'>
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Product</th>
+            <th>Code</th>
+            <th>Tax</th>
+            <th>Price</th>
+            <th> </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor='let product of products'>
+            <td> <img [src]='product.imageUrl'
+                      [title]='product.productName'
+                      [style.width.px]='imageWidth'
+                      [style.margin.px]='imageMargin'>
+            </td>
+            <td>
+              <a [routerLink]="['/products', product.productId]"> {{ product.productName }}</a>
+          </td>
+            <td>{{ product.productCode | lowercase }}</td>
+            <td>{{ product.tax | currency }}</td>
+            <td>{{ product.price | currency }}</td>
+            <td> 
+              <button class='btn btn-outline-secondary'
+                      (click)='onAddToBasketClicked(product)'
+                      style='width:120px'>
+                      <i class='fa fa-chevron-left'></i> Add to Basket
+              </button>
+            </td>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class='card-footer'>
+    <button class='btn btn-outline-secondary'
+            (click)='onViewBasketClicked()'
+            style='width:200px'>
+      <i class='fa fa-chevron-left'></i> Go to Basket
+    </button>
+  </div>
+</div>

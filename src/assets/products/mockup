@@ -1,0 +1,100 @@
+import { ThisReceiver } from '@angular/compiler';
+import { Component, OnInit } from '@angular/core';
+import { element } from 'protractor';
+import { Basket, IBasket } from './basket';
+
+@Component({
+  selector: 'app-basket',
+  templateUrl: './basket.component.html',
+  styleUrls: ['./basket.component.css']
+})
+export class BasketComponent implements OnInit {
+  basketContent: IBasket[] = [
+    {
+      productId: 1,
+      productName: 'Leaf Rake',
+      price: 19.95,
+      tax : 2,
+      qty: 3
+    },
+    {
+      productId: 2,
+      productName: 'Garden Cart',
+      price: 32.99,
+      tax : 2,
+      qty: 5
+    }
+  ];
+  orderTotal: 0; // Initialize with 0
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  onPaymentClicked(): void{
+    // Payment situation... TBD
+  }
+
+  addItemToBasket(item: IBasket): void{
+    this.basketContent.push(item);
+    console.log('New basket content:' + this.basketContent);
+  }
+
+  removeItemFromBasket(item: IBasket): void{
+    const index = this.basketContent.indexOf(item);
+    if (index !== -1) {
+      this.basketContent.splice(index, 1);
+    }
+
+    console.log('New basket content:' + this.basketContent);
+  }
+
+  increaseItemQty(item: IBasket): void{
+    this.basketContent.forEach(element => {
+      if (element.productId === item.productId){
+        element.qty ++;
+      }
+    });
+
+    console.log('New basket content:' + this.basketContent);
+  }
+
+  decreaseItemQty(item: IBasket): void{
+    this.basketContent.forEach(element => {
+      if (element.productId === item.productId){
+        if (element.qty > 1){
+          element.qty --;
+        } else {
+          this.removeItemFromBasket(item);
+        }
+      }
+    });
+
+    console.log('New basket content:' + this.basketContent);
+  }
+
+  emptyBasket(): void{
+    this.basketContent = [];
+  }
+
+  // True if basket is empty, false otherwise
+  isBasketEmpty(): boolean{
+    return (this.basketContent.length < 0);
+  }
+
+  getBasketTotal(): number {
+    let basketTotal = 0;
+
+    if (this.basketContent.length > 0) {
+      this.basketContent.forEach(element =>
+		basketTotal += element.qty * (element.price + element.tax))
+    }
+    return basketTotal;
+  }
+
+  getTotalPerItem(): number {
+    return 5;
+  }
+
+}

@@ -1,0 +1,49 @@
+<div>
+    <div class='table-responsive'>
+        <table class='table' >
+            <thead>
+            <tr>
+                <th>Product</th>
+                <th>Decrease</th>
+                <th>Qty</th>
+                <th>Increase</th>
+                <th>Tax</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor='let product of basketContent'>
+                    <td>{{ product.productName }}</td>
+                    <td>
+                        <button class='btn btn-outline-secondary'
+                                (click)='this.basket.decreaseItemQty(product)'
+                                style='width:40px'> -
+                        </button>
+                    </td>
+                    <td>{{ product.qty }}</td>
+                    <td>
+                        <button class='btn btn-outline-secondary'
+                                (click)='this.basket.increaseItemQty(product)'
+                                style='width:40px'> +
+                        </button>
+                    </td>
+                    <td>{{ product.tax | currency }}</td>
+                    <td>{{ product.price | currency }}</td> 
+                    <td>{{ ((product.price + product.tax) * product.qty) | currency }}</td> 
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class='card-footer'>
+        <h4> Order total: {{ getBasketTotal() }}</h4>
+
+        <button class='btn btn-outline-secondary'
+                (click)='onPaymentClicked()'
+                style='width:200px'>
+          <i class='fa fa-chevron-left'></i> Go to Payment
+        </button>
+    </div>
+</div>
