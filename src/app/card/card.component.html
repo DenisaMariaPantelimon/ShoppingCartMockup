@@ -1,1 +1,40 @@
-<p>card works!</p>
+<div>
+    <div class='card-body'>
+        <div class='table-responsive'>
+            <table class='table' 
+                    *ngIf='cards && cards.length'>
+                    
+                <thead>
+                <tr>
+                    <th> </th>
+                    <th>Card Number </th>
+                    <th>Card Holder</th>
+                    <th>Expiration Date</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr *ngFor='let card of cards'>
+                    <td><button type="radio"> </button> 
+                        <img [src]='card.imageUrl'
+                            [title]='card.cardTitle'
+                            [style.width.px]='50'
+                            [style.margin.px]='2'
+                            [style.margin.left.px]='25'>
+                    </td>
+                    <td> {{ card.cardNumber }}</td>
+                    <td>{{ card.cardHolder | uppercase }}</td>
+                    <td>{{ card.expirationDate }}</td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div>
+        <button class='btn btn-outline-secondary'
+                (click)='onFinishPaymentClicked()'
+                style='width:80px'>
+            <i class='fa fa-chevron-left'></i> Done
+        </button>
+    </div>
+</div>
