@@ -16,7 +16,6 @@ export class ProductListComponent implements OnInit {
 
   errorMessage = '';
   products: IProduct[] = [];
-  basketItems: IProduct[] = [];
 
 // inject products from service
   constructor(private productService: ProductService,

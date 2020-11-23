@@ -1,34 +1,36 @@
 import { Injectable } from '@angular/core';
-
-import { IProduct, Product } from './product';
-
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-
 import { tap, catchError, map } from 'rxjs/operators';
+import { ICard } from './card';
+// import { IProduct } from './product';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
-export class ProductService{
-  private productUrl = 'assets/products/products.json';
-  // private productUrl = 'http://localhost/first/getProducts.php'; Retreive data from server
+export class CardService {
+  private cardUrl = 'assets/cards/cards.json';
+  // private baseUrl = 'http://localhost/first/store.php'; SERVER URL
   constructor(private http: HttpClient){}
 
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.productUrl)
+  getCards(): Observable<ICard[]> {
+    return this.http.get<ICard[]>(this.cardUrl)
       .pipe(
         tap(data => console.log('All: ' + JSON.stringify(data))),
         catchError(this.handleError)
       );
   }
 
-  getProduct(id: number): Observable<IProduct | undefined> {
-    return this.getProducts()
-      .pipe(
-        map((products: IProduct[]) => products.find(p => p.productId === id))
-      );
-  }
+  // sendOrder(basketContent: IProduct[]): Observable<Product[]> {
+  //   return this.http.post(`${this.baseUrl}/store`, { data: basketContent })
+  //     .pipe(
+  //       tap((res) => { 
+  //       console.log('Post result: ', res);
+  //       return res;
+  //     }),
+  //     catchError(this.handleError));
+  //    )
+  // }
 
   private handleError(err: HttpErrorResponse): Observable<never> {
     let errorMessage = '';
@@ -43,4 +45,5 @@ export class ProductService{
     console.error(errorMessage);
     return throwError(errorMessage);
   }
+
 }

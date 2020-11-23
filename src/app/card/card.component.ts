@@ -1,6 +1,9 @@
 import { NodeWithI18n } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ICard } from './card';
+import { CardService } from './card.service';
+import { BasketService } from '../basket/basket.service';
+// import { IProduct } from './product';
 
 @Component({
   selector: 'app-card',
@@ -8,35 +11,24 @@ import { ICard } from './card';
   styleUrls: ['./card.component.css']
 })
 export class CardComponent implements OnInit {
-  // TO BE REMOVED
-  cards: ICard[] = [
-    {
-      cardHolder: 'ION',
-      cardNumber: 150,
-      expirationDate: '2010-21-10',
-      imageUrl: 'assets/images/visa.png',
-      cardTitle: 'Visa'
-    },
-    {
-      cardHolder: 'DOREL',
-      cardNumber: 180,
-      expirationDate: '2010-21-16',
-      imageUrl: 'assets/images/revolut.png',
-      cardTitle: 'Revolut'
-    }
-  ];
-  constructor() { }
+  cards: ICard[] = [];
+  errorMessage = '';
 
-  ngOnInit(): void {
+  constructor(public cardService: CardService,
+              public basketService:BasketService) { 
   }
 
+  ngOnInit(): void {
+    this.cardService.getCards().subscribe({
+      next: cards => this.cards = cards,
+      error: err => this.errorMessage = err
+    });
+  }
+
+  // Send data to server
   onFinishPaymentClicked(): void {
-    // Communication with server
-
-    // Need to send selected card and basket.
-
-    // Perform two checks on selected card:
-    // One for expiration - LOCAL, one for avaliability - SERVER
+    // this.cardService.sendOrder(this.basketService.basketContentS);
+    alert('Order placed!');
   }
 
 }
